@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Dishe;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\DisheRequest;
 
 class DisheController extends Controller
@@ -14,15 +14,17 @@ class DisheController extends Controller
      */
     public function index() : View
     {
-        return view('dishe.index');
+        return view('dishe.index', 
+            ["dishes" => DB::table('dishes')->paginate(35)]
+        );
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create() : View
     {
-        //
+        return view('dishe.create');
     }
 
     /**
