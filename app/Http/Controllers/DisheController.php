@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Dishe;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\DisheRequest;
-
+use Illuminate\Http\RedirectResponse;
 class DisheController extends Controller
 {
     /**
@@ -30,10 +31,12 @@ class DisheController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(DisheRequest $request)
+    public function store(DisheRequest $request) : RedirectResponse
     {
         $validated = $request->validated();
-        return (Dishe::create($validated));
+        $dishe = Dishe::create($validated);
+
+        return redirect()->route('dishes.edit', $dishe);
     }
 
     /**
