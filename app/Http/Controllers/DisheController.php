@@ -42,32 +42,35 @@ class DisheController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Dishe $dishe)
+    public function show(Dishe $dish) : View
     {
-        //
+        return view('dishe.show', ["dish" => $dish]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Dishe $dishe)
+    public function edit(Dishe $dish) : View
     {
-        //
+        return view('dishe.edit', ["dish" => $dish]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Dishe $dishe)
+    public function update(DisheRequest $request, Dishe $dish) : RedirectResponse
     {
-        //
+        $validated = $request->validated();
+        $dish->update($validated);
+        return redirect()->route('dishes.edit', $dish);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Dishe $dishe)
+    public function destroy(Dishe $dish) 
     {
-        //
+        $dish->delete();
+        return redirect()->route('dishes.index');
     }
 }
