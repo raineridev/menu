@@ -23,7 +23,7 @@ class DisheRequest extends FormRequest
     {
         return [
             "name" => "required|string|max:255",
-            "price" => "required|decimal:2|",
+            "price" => "required|decimal:0,2|",
             "description" => "required|string|max:5000",
         ];
     }
