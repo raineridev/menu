@@ -32,6 +32,15 @@
                 <td class="px-6 py-4">
                     R${{ $dishe->price }}
                 </td>
+                <td>
+                <form method="POST" action="{{ route('dishes.destroy', $dishe->id) }}">
+                                            @csrf
+                                            @method('delete')
+                                            <x-dropdown-link :href="route('dishes.destroy', $dishe->id)" onclick="event.preventDefault(); this.closest('form').submit();">
+                                                {{ __('Deletar') }}
+                                            </x-dropdown-link>
+                </form>    
+                </td>
             </tr>
 @endforeach
         </tbody>
